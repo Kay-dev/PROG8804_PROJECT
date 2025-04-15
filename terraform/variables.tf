@@ -40,3 +40,9 @@ variable "supabase_key" {
   description = "Supabase anon key"
   type       = string
 }
+
+variable "api_url" {
+  description = "API URL"
+  type       = string
+  default    = ""
+}

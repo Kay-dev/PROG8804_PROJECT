@@ -43,8 +43,8 @@ resource "aws_security_group" "final_sg" {
 
   ingress {
     description = "Allow container port access"
-    from_port   = 3000
-    to_port     = 3000
+    from_port   = 3004
+    to_port     = 3004
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -61,13 +61,27 @@ resource "aws_security_group" "final_sg" {
   }
 }
 
-resource "aws_subnet" "sn" {
+resource "aws_subnet" "sn1" {
   vpc_id                  = aws_vpc.main.id
   cidr_block              = "10.0.1.0/24"  # Subset of the VPC CIDR 10.0.0.0/16
   map_public_ip_on_launch = true
 
+  availability_zone = "ap-southeast-1a"
+
   tags = {
-    Name = "sn"
+    Name = "sn1"
+  }
+}
+
+resource "aws_subnet" "sn2" {
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = "10.0.2.0/24"  # Subset of the VPC CIDR 10.0.0.0/16
+  map_public_ip_on_launch = true
+
+  availability_zone = "ap-southeast-1b"
+
+  tags = {
+    Name = "sn2"
   }
 }
 
@@ -98,7 +112,12 @@ resource "aws_route_table" "main" {
   }
 }
 
-resource "aws_route_table_association" "main" {
-  subnet_id      = aws_subnet.sn.id
+resource "aws_route_table_association" "main1" {
+  subnet_id      = aws_subnet.sn1.id
+  route_table_id = aws_route_table.main.id
+}
+
+resource "aws_route_table_association" "main2" {
+  subnet_id      = aws_subnet.sn2.id
   route_table_id = aws_route_table.main.id
 }
