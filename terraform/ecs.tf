@@ -64,6 +64,59 @@ resource "aws_ecs_task_definition" "final-task-definition-backend" {
   task_role_arn            = aws_iam_role.ecs_task_role.arn
 }
 
+# resource "aws_ecs_service" "final-service-frontend" {
+#   name                               = "final-service-frontend"
+#   cluster                            = aws_ecs_cluster.final-cluster.id
+#   launch_type                        = "FARGATE"
+#   enable_execute_command             = true
+#   deployment_maximum_percent         = 200
+#   deployment_minimum_healthy_percent = 100
+#   desired_count                      = 1
+#   task_definition                    = aws_ecs_task_definition.final-task-definition-frontend.id
+
+#   network_configuration {
+#     assign_public_ip = true
+#     security_groups  = [aws_security_group.final_sg.id]
+#     subnets          = [aws_subnet.sn.id]
+#   }
+
+#   tags = {
+#     Name = "final-service-frontend"
+#   }
+# }
+
+# resource "aws_ecs_task_definition" "final-task-definition-frontend" {
+#   container_definitions = jsonencode([
+#     {
+#       name : "final-frontend-container",
+#       image : "${aws_ecr_repository.final-repo.repository_url}",
+#       essential : true,
+#       portMappings : [
+#         {
+#           containerPort : 3000,
+#           hostPort : 80,
+#           protocol : "tcp"
+#         }
+#       ]
+#       environment = [
+#         {
+#           name : "API_URL",
+#           value : ""
+#         }
+#       ]
+#     }
+#   ])
+
+
+#   family                   = "final-task-definition-frontend"
+#   network_mode             = "awsvpc"
+#   requires_compatibilities = ["FARGATE"]
+#   cpu                      = "256"
+#   memory                   = "512"
+#   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
+#   task_role_arn            = aws_iam_role.ecs_task_role.arn
+# }
+
 resource "aws_iam_role" "ecs_task_execution_role" {
   name = "ecs_task_execution_role"
 
