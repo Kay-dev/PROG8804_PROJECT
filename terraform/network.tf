@@ -41,6 +41,14 @@ resource "aws_security_group" "final_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  ingress {
+    description = "Allow container port access"
+    from_port   = 3000
+    to_port     = 3000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     from_port  = 0
     to_port    = 0
@@ -55,7 +63,7 @@ resource "aws_security_group" "final_sg" {
 
 resource "aws_subnet" "sn" {
   vpc_id                  = aws_vpc.main.id
-  cidr_block              = var.cidr_block_vpc
+  cidr_block              = "10.0.1.0/24"  # Subset of the VPC CIDR 10.0.0.0/16
   map_public_ip_on_launch = true
 
   tags = {
