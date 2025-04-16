@@ -88,7 +88,7 @@ resource "aws_ecs_service" "final-service-frontend" {
   load_balancer {
     target_group_arn = aws_lb_target_group.frontend_tg.arn
     container_name   = "final-frontend-container"
-    container_port   = 3000
+    container_port   = 8080
   }
 
   tags = {
@@ -104,15 +104,9 @@ resource "aws_ecs_task_definition" "final-task-definition-frontend" {
       essential : true,
       portMappings : [
         {
-          containerPort : 3000,
-          hostPort : 3000,
+          containerPort : 8080,
+          hostPort : 8080,
           protocol : "tcp"
-        }
-      ]
-      environment = [
-        {
-          name : "REACT_APP_API_URL",
-          value : "${local.backend_api_url}"
         }
       ]
     }

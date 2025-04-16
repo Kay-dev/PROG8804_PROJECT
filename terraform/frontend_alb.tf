@@ -12,9 +12,10 @@ resource "aws_lb" "frontend_lb" {
   }
 }
 
+# Creating the target group first
 resource "aws_lb_target_group" "frontend_tg" {
   name        = "frontend-target-group"
-  port        = 3000
+  port        = 8080
   protocol    = "HTTP"
   vpc_id      = aws_vpc.main.id
   target_type = "ip"
@@ -22,15 +23,16 @@ resource "aws_lb_target_group" "frontend_tg" {
   health_check {
     enabled             = true
     interval            = 30
-    path                = "/"
+    path                = "/index.html"
     port                = "traffic-port"
     healthy_threshold   = 3
     unhealthy_threshold = 3
     timeout             = 5
-    matcher             = "200"
+    matcher             = "200,302,304"
   }
 }
 
+# Listener configuration
 resource "aws_lb_listener" "frontend_listener" {
   load_balancer_arn = aws_lb.frontend_lb.arn
   port              = 80
@@ -40,10 +42,4 @@ resource "aws_lb_listener" "frontend_listener" {
     type             = "forward"
     target_group_arn = aws_lb_target_group.frontend_tg.arn
   }
-}
-
-# Output the Frontend ALB DNS name
-output "frontend_service_endpoint" {
-  value       = "http://${aws_lb.frontend_lb.dns_name}"
-  description = "The endpoint of the frontend service"
 }

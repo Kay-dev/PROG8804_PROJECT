@@ -42,9 +42,3 @@ resource "aws_lb_listener" "front_end" {
   }
 }
 
-# Output the ALB DNS name for use in frontend configuration
-output "backend_service_endpoint" {
-  value       = "http://${aws_lb.app_lb.dns_name}"
-  description = "The endpoint of the backend service"
-}
-
