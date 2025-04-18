@@ -37,6 +37,12 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Code Scanning
+        uses: github/codeql-action@v3
+        with:
+          languages: "javascript"
+          command: "analyze"
+
       - name: Install dependencies
         run: |
           cd backend

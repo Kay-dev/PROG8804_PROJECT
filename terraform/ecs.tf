@@ -55,7 +55,18 @@ resource "aws_ecs_task_definition" "final-task-definition-backend" {
           name : "SUPABASE_KEY",
           value : "${var.supabase_key}"
         }
-      ]
+      ],
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          "awslogs-group" = "/ecs/final-service-backend"
+          "awslogs-create-group" = "true"
+          "max-buffer-size" = "25m"
+          "awslogs-region" = "ap-southeast-1"
+          "awslogs-stream-prefix" = "ecs"
+        }
+        secretOptions = []
+      }
     }
   ])
 
@@ -108,7 +119,18 @@ resource "aws_ecs_task_definition" "final-task-definition-frontend" {
           hostPort : 8080,
           protocol : "tcp"
         }
-      ]
+      ],
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          "awslogs-group" = "/ecs/final-service-frontend"
+          "awslogs-create-group" = "true"
+          "max-buffer-size" = "25m"
+          "awslogs-region" = "ap-southeast-1"
+          "awslogs-stream-prefix" = "ecs"
+        }
+        secretOptions = []
+      }
     }
   ])
 
