@@ -2,7 +2,8 @@ resource "aws_ecs_cluster" "final-cluster" {
   name = "final-cluster"
 
   tags = {
-    Name = "final-cluster"
+    Name      = "final-cluster"
+    CreatedBy = "terraform"
   }
 }
 
