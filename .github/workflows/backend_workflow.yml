@@ -1,4 +1,4 @@
-
+# CI/CD pipeline to build and deploy backend application to ECS
 name: "Build and Deploy Backend to Amazon ECS"
 
 on:
