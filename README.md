@@ -25,6 +25,29 @@ project/
 
 This project implements a modern microservices architecture deployed on AWS:
 
+```mermaid
+flowchart TD
+    User[User's Browser]
+    FALB[Frontend ALB]
+    FECS[Frontend ECS Service]
+    BALB[Backend ALB]
+    BECS[Backend ECS Service]
+    DB[Supabase]
+
+    User -->|HTTPS| FALB
+    FALB --> FECS
+    FECS -->|API Calls| BALB
+    BALB --> BECS
+    BECS -->|DB Queries| DB
+
+    subgraph AWS Cloud
+        FALB
+        FECS
+        BALB
+        BECS
+    end
+```
+
 - **Frontend**: React single-page application deployed to Amazon ECS
 - **Backend**: Node.js REST API deployed to Amazon ECS
 - **Database**: Supabase for data persistence
