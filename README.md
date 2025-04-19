@@ -1,6 +1,6 @@
 # Todo Application - DevOps Capstone Project
 
-A modern todo application built with React frontend and Node.js backend, featuring a comprehensive DevOps implementation including automated CI/CD pipelines, infrastructure as code, and cloud deployment on AWS ECS.
+A modern todo application built with React frontend and Node.js backend, featuring a comprehensive DevOps implementation including automated CI/CD pipelines, infrastructure as code, and cloud deployment on AWS ECS. Monitoring enabled.
 
 ## Prerequisites
 
