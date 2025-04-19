@@ -12,7 +12,7 @@ A modern todo application built with React frontend and Node.js backend, featuri
 
 ```
 project/
-├── frontend/           # React TypeScript frontend
+├── frontend/          # React TypeScript frontend
 ├── backend/           # Node.js backend
 └── .github/           # GitHub Actions workflows
 ```
