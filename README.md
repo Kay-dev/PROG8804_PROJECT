@@ -19,6 +19,11 @@ project/
 └── .aws/              # AWS task definitions
 ```
 
+## Project Architecture
+
+![F52A0C2F-35DD-4BB8-BD8F-59A01E40A70B](https://github.com/user-attachments/assets/a41f660f-2c29-4912-ad66-60ad5fb3f268)
+
+
 ## DevOps Implementation
 
 ### 1. Application & Infrastructure Architecture
