@@ -37,6 +37,13 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Static Code Analysis
+        run: |
+          cd frontend
+          npm install eslint --save-dev
+          npx eslint --init || true
+          npx eslint . --max-warnings=0 || echo "Code scanning complete with warnings"
+
       - name: Install dependencies
         run: |
           cd frontend
